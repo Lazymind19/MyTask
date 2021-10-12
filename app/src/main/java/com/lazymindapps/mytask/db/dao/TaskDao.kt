@@ -12,7 +12,7 @@ interface TaskDao {
 
 
     @Query("Select * from tbl_task")
-    suspend fun getAllTask(): LiveData<List<Task>>
+     fun getAllTask() : LiveData<List<Task>>
 
     @Delete
     suspend fun deleteTask(task: Task)

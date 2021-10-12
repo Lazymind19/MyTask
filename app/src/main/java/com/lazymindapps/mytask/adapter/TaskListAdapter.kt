@@ -1,24 +1,42 @@
 package com.lazymindapps.mytask.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.lazymindapps.mytask.databinding.RvTasklistItemBinding
+import com.lazymindapps.mytask.db.model.Task
 
-class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ViewHOlder>() {
+class TaskListAdapter(val taskList:List<Task>) : RecyclerView.Adapter<TaskListAdapter.ViewHOlder>() {
 
-    class ViewHOlder(itemView: View) :RecyclerView.ViewHolder(itemView){
 
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListAdapter.ViewHOlder {
-        TODO("Not yet implemented")
+
+        val binding = RvTasklistItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return ViewHOlder(binding)
+
     }
 
     override fun onBindViewHolder(holder: TaskListAdapter.ViewHOlder, position: Int) {
-        TODO("Not yet implemented")
+        val task = taskList[position]
+        holder.bind(task)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return taskList.size
+
+    }
+
+    class ViewHOlder( val itemBind: RvTasklistItemBinding) :RecyclerView.ViewHolder(itemBind.root){
+        fun bind(task:Task){
+            itemBind.tvTaskTitle.text = task.task
+            itemBind.tvTaskDescription.text = task.description
+
+
+
+        }
+
     }
 }
