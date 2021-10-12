@@ -1,6 +1,8 @@
 package com.lazymindapps.mytask.ui
 
 import TaskDeleteInterface
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,14 +26,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class TaskListFragment : Fragment(),CoroutineScope {
+class TaskListFragment : Fragment(), CoroutineScope {
     lateinit var binding: FragmentTaskListBinding
     lateinit var viewModel: TaskViewModel
-    var taskList:List<Task> = mutableListOf()
+    var taskList: List<Task> = mutableListOf()
     val job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = job+Dispatchers.Main
+        get() = job + Dispatchers.Main
 
 
     override fun onCreateView(
@@ -55,41 +57,60 @@ class TaskListFragment : Fragment(),CoroutineScope {
 
     }
 
-    private fun fetchAllTask(){
+    private fun fetchAllTask() {
 
-        viewModel.getAllTask().observe(viewLifecycleOwner, Observer { tasks->
-            if (tasks!=null) {
+        viewModel.getAllTask().observe(viewLifecycleOwner, Observer { tasks ->
+            if (tasks != null) {
                 taskList = tasks
                 binding.rvTaskList.visibility = View.VISIBLE
                 binding.tvNoTaskMessage.visibility = View.GONE
 //                Toast.makeText(requireContext(),taskList.toString(),Toast.LENGTH_LONG).show()
                 showTaskListRecyclerView(tasks)
-            }
-            else{
+            } else {
                 binding.tvNoTaskMessage.visibility = View.VISIBLE
                 binding.rvTaskList.visibility = View.GONE
             }
 
 
-
         })
-
 
 
     }
 
-    private fun showTaskListRecyclerView(taskList:List<Task>){
+    private fun showTaskListRecyclerView(taskList: List<Task>) {
         val layoutManager = LinearLayoutManager(context)
         binding.rvTaskList.layoutManager = layoutManager
 
-        val adapter = TaskListAdapter(taskList,object :TaskDeleteInterface{
+        val adapter = TaskListAdapter(taskList, object : TaskDeleteInterface {
             override fun deleteTask(task: Task) {
 
-                launch {
-                    viewModel.deleteTask(task)
-                    Toast.makeText(requireContext(),"${task.task} is Deleted",Toast.LENGTH_LONG).show()
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                dialogBuilder.setMessage("Do you want to delete task?")
+                    .setCancelable(true)
+                    .setPositiveButton(
+                        "Yes",
+                        DialogInterface.OnClickListener { dialogInterface, i ->
+                            launch {
+                                viewModel.deleteTask(task)
+                                Toast.makeText(
+                                    requireContext(),
+                                    "${task.task} is Deleted",
+                                    Toast.LENGTH_LONG
+                                ).show()
 
-                }
+                                dialogInterface.dismiss()
+                            }
+
+
+                        })
+                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                    })
+
+                val deleteDialogAlert = dialogBuilder.create()
+                deleteDialogAlert.setTitle("Delete Task")
+                deleteDialogAlert.show()
+
 
             }
 
