@@ -1,5 +1,6 @@
 package com.lazymindapps.mytask.ui
 
+import TaskDeleteInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,11 +18,20 @@ import com.lazymindapps.mytask.adapter.TaskListAdapter
 import com.lazymindapps.mytask.databinding.FragmentTaskListBinding
 import com.lazymindapps.mytask.db.model.Task
 import com.lazymindapps.mytask.viewModel.TaskViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class TaskListFragment : Fragment() {
+class TaskListFragment : Fragment(),CoroutineScope {
     lateinit var binding: FragmentTaskListBinding
     lateinit var viewModel: TaskViewModel
     var taskList:List<Task> = mutableListOf()
+    val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = job+Dispatchers.Main
 
 
     override fun onCreateView(
@@ -72,7 +82,18 @@ class TaskListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         binding.rvTaskList.layoutManager = layoutManager
 
-        val adapter = TaskListAdapter(taskList)
+        val adapter = TaskListAdapter(taskList,object :TaskDeleteInterface{
+            override fun deleteTask(task: Task) {
+
+                launch {
+                    viewModel.deleteTask(task)
+                    Toast.makeText(requireContext(),"${task.task} is Deleted",Toast.LENGTH_LONG).show()
+
+                }
+
+            }
+
+        })
         binding.rvTaskList.adapter = adapter
 
 
