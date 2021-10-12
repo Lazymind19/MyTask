@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+
     tools:context=".ui.AddOrUpdateTaskFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,12 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Task Title"
+            android:layout_margin="8dp"
+            app:endIconMode="clear_text"
             app:boxCornerRadiusBottomEnd="8dp"
             app:boxCornerRadiusBottomStart="8dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
+                android:inputType="textCapSentences"
                 android:layout_height="match_parent" />
 
 
@@ -29,7 +32,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etDescription"
+            android:layout_margin="8dp"
             android:layout_width="match_parent"
+            app:endIconMode="clear_text"
             android:layout_height="0dp"
             android:hint="Task Description"
             app:boxCornerRadiusBottomEnd="8dp"
@@ -40,6 +45,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:gravity="top|start"
+                android:inputType="textCapSentences"
 
                 android:layout_height="match_parent" />
 
@@ -51,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Done"
+            android:layout_margin="8dp"
 
             android:background="@drawable/custom_botton"
             app:layout_constraintBottom_toBottomOf="parent"
