@@ -12,5 +12,7 @@ class TaskRepo(private val db: TaskDatabase) {
 
     suspend fun deleteTask(task:Task) = db.getTaskDao().deleteTask(task)
 
+    suspend fun updateTask(task:String,description:String,sn:Int) = db.getTaskDao().updateTask(task,description,sn)
+
      fun getAllTask(): LiveData<List<Task>> = db.getTaskDao().getAllTask()
 }

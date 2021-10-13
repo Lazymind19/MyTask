@@ -19,6 +19,7 @@ import com.lazymindapps.mytask.R
 import com.lazymindapps.mytask.adapter.TaskListAdapter
 import com.lazymindapps.mytask.databinding.FragmentTaskListBinding
 import com.lazymindapps.mytask.db.model.Task
+import com.lazymindapps.mytask.util.Constants
 import com.lazymindapps.mytask.viewModel.TaskViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +53,7 @@ class TaskListFragment : Fragment(), CoroutineScope {
 
 
         binding.fbAddTask.setOnClickListener {
-            val action = TaskListFragmentDirections.actionTaskListFragmentToAddOrUpdateTaskFragment()
+            val action = TaskListFragmentDirections.actionTaskListFragmentToAddOrUpdateTaskFragment(Constants.SAVE_TASK_FRAGMENT,"","","")
             findNavController().navigate(action)
         }
 

@@ -17,5 +17,8 @@ interface TaskDao {
     @Delete
     suspend fun deleteTask(task: Task)
 
+    @Query("Update tbl_task set task=:task, description=:description where id=:sn")
+    suspend fun updateTask(task:String,description:String,sn:Int)
+
 
 }

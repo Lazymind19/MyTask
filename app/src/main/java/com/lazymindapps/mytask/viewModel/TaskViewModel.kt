@@ -15,6 +15,7 @@ class TaskViewModel (val repo:TaskRepo ) : ViewModel() {
     suspend fun insertTask(task: Task) = repo.insertTask(task)
 
     suspend fun deleteTask(task: Task) = repo.deleteTask(task)
+    suspend fun updateTask(task:String,description:String,sn:Int) = repo.updateTask(task,description,sn)
 
      fun getAllTask():LiveData<List<Task>>{
         allTaskList = repo.getAllTask()

@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.lazymindapps.mytask.R
 import com.lazymindapps.mytask.databinding.FragmentTaskDetailBinding
+import com.lazymindapps.mytask.util.Constants
 
 class TaskDetailFragment : Fragment() {
     lateinit var binding:FragmentTaskDetailBinding
@@ -30,6 +32,11 @@ class TaskDetailFragment : Fragment() {
 
         binding.tvTitle.text = args.taskTitle
         binding.tvDescription.text = args.taskDescription
+
+        binding.btnEdit.setOnClickListener {
+            val action = TaskDetailFragmentDirections.actionTaskDetailFragmentToAddOrUpdateTaskFragment(Constants.EDIT_TASK_FRAGMENT,args.taskTitle,args.taskDescription,args.sn.toString())
+            findNavController().navigate(action)
+        }
     }
 
 }

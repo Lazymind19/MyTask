@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.lazymindapps.mytask.db.dao.TaskDao
 import com.lazymindapps.mytask.db.model.Task
 
-@Database(entities = [Task::class],version = 2)
+@Database(entities = [Task::class],version = 3)
 abstract  class TaskDatabase:RoomDatabase() {
     abstract fun getTaskDao():TaskDao
 
