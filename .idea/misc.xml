@@ -6,6 +6,7 @@
         <entry key="..\:/All flutter projects/MyTask/app/src/main/res/drawable/custom_botton.xml" value="0.20416666666666666" />
         <entry key="..\:/All flutter projects/MyTask/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
         <entry key="..\:/All flutter projects/MyTask/app/src/main/res/layout/fragment_add_or_update_task.xml" value="0.17028985507246377" />
+        <entry key="..\:/All flutter projects/MyTask/app/src/main/res/layout/fragment_task_detail.xml" value="0.25" />
         <entry key="..\:/All flutter projects/MyTask/app/src/main/res/layout/fragment_task_list.xml" value="0.25" />
         <entry key="..\:/All flutter projects/MyTask/app/src/main/res/layout/rv_tasklist_item.xml" value="0.25" />
       </map>

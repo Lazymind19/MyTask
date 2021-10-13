@@ -8,19 +8,38 @@
     <fragment
         android:id="@+id/taskListFragment"
         android:name="com.lazymindapps.mytask.ui.TaskListFragment"
-        android:label="fragment_task_list"
-        tools:layout="@layout/fragment_task_list" >
+        android:label="TaskList"
+        tools:layout="@layout/fragment_task_list">
         <action
             android:id="@+id/action_taskListFragment_to_addOrUpdateTaskFragment"
             app:destination="@id/addOrUpdateTaskFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addOrUpdateTaskFragment"
         android:name="com.lazymindapps.mytask.ui.AddOrUpdateTaskFragment"
-        android:label="fragment_add_or_update_task"
-        tools:layout="@layout/fragment_add_or_update_task" >
+        android:label="New Task"
+        tools:layout="@layout/fragment_add_or_update_task">
         <action
             android:id="@+id/action_addOrUpdateTaskFragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.lazymindapps.mytask.ui.TaskDetailFragment"
+        android:label="Detail Task"
+        tools:layout="@layout/fragment_task_detail">
+        <argument
+            android:name="taskTitle"
+            app:argType="string" />
+        <argument
+            android:name="taskDescription"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="sn"
+            app:argType="integer" />
     </fragment>
 </navigation>

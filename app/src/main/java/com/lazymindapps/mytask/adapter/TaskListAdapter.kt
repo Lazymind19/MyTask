@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.lazymindapps.mytask.R
 import com.lazymindapps.mytask.databinding.RvTasklistItemBinding
 import com.lazymindapps.mytask.db.model.Task
+import com.lazymindapps.mytask.ui.TaskListFragmentDirections
 
 class TaskListAdapter(
     val taskList:List<Task>,
@@ -28,6 +31,12 @@ class TaskListAdapter(
         val task = taskList[position]
 
         holder.bind(task,taskDeleteInterface)
+        holder.itemView.setOnClickListener {view->
+            val action = TaskListFragmentDirections.actionTaskListFragmentToTaskDetailFragment(
+                task.task.toString(),task.description,task.id)
+            view.findNavController().navigate(action)
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -43,7 +52,9 @@ class TaskListAdapter(
                 taskDeleteInterface.deleteTask(task)
 
 
+
             }
+
 
 
 

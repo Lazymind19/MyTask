@@ -60,7 +60,8 @@ class AddOrUpdateTaskFragment : Fragment(),CoroutineScope {
             val task = Task(task = title, description = description, date = 0)
             launch {
                 viewModel.insertTask(task)
-                findNavController().navigate(R.id.action_addOrUpdateTaskFragment_to_taskListFragment)
+                val action = AddOrUpdateTaskFragmentDirections.actionAddOrUpdateTaskFragmentToTaskListFragment()
+                findNavController().navigate(action)
 
 
 

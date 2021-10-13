@@ -52,7 +52,8 @@ class TaskListFragment : Fragment(), CoroutineScope {
 
 
         binding.fbAddTask.setOnClickListener {
-            findNavController().navigate(R.id.action_taskListFragment_to_addOrUpdateTaskFragment)
+            val action = TaskListFragmentDirections.actionTaskListFragmentToAddOrUpdateTaskFragment()
+            findNavController().navigate(action)
         }
 
     }
